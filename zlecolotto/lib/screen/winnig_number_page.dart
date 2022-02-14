@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zlecolotto/provider/myProvider.dart';
+import 'package:zlecolotto/screen/tab_bar_page.dart' as Globals;
 import 'package:zlecolotto/model/lotteryball.dart';
+import 'package:zlecolotto/model/round_select_box.dart';
 
 class WinningNumberPage extends StatefulWidget {
   const WinningNumberPage({Key? key}) : super(key: key);
@@ -29,8 +32,12 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
                       Container( //당첨번호 회차, 날짜
                         child: Column(
                           children: [
+                            RoundSelectBox(),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Text(
-                              "제 100회 당첨배출 결과",
+                              "제 ${MyProvider.drwNo}회 당첨배출 결과",
                               style: TextStyle(
                                   fontFamily: 'tmon',
                                   color: Colors.black87,
@@ -41,7 +48,7 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
                               height: 10,
                             ),
                             Text(
-                              "2020-11-22 추첨",
+                              "${MyProvider.drwNoDate} 추첨",
                               style: TextStyle(
                                   fontFamily: 'tmon',
                                   color: Colors.black87,
@@ -52,22 +59,22 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
                               height: 10,
                             ),
                             Container( //공 컨테이너
-                              margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                              margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  ball.getBall(),
-                                  ball.getBall(),
-                                  ball.getBall(),
-                                  ball.getBall(),
-                                  ball.getBall(),
-                                  ball.getBall(),
+                                  ball.getBall(MyProvider.drwtNo1),
+                                  ball.getBall(MyProvider.drwtNo2),
+                                  ball.getBall(MyProvider.drwtNo3),
+                                  ball.getBall(MyProvider.drwtNo4),
+                                  ball.getBall(MyProvider.drwtNo5),
+                                  ball.getBall(MyProvider.drwtNo6),
                                   SvgPicture.asset(
                                     'svg/plus.svg',
                                     width: 16,
                                     height: 16,
                                   ),
-                                  ball.getBall(),
+                                  ball.getBall(MyProvider.bnusNo),
                                 ],
                               ),
                             )
@@ -80,19 +87,25 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
                       //밑에는 x
                       Container(//표
                         child: Table(
-                          border: new TableBorder(
-                              horizontalInside: new BorderSide(color: Colors.grey, width: 0.5)
-                          ),
+                          border: TableBorder.all(width: 1, color:Colors.black54),
                           children: [
                             TableRow(children: [
-                              Center(child: Text('총 상금액(원)', style: TextStyle(fontSize: 16))),
-                              Center(child: Text('1등 상금액(원)', style: TextStyle(fontSize: 16),)),
-                              Center(child: Text('1등 당첨인원(명)', style: TextStyle(fontSize: 16))),
+                              Padding(padding: EdgeInsets.all(8),
+                              child: Text('총 상금액', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+                              Padding(padding: EdgeInsets.all(8),
+                              child: Text('${MyProvider.totSellamnt}원', style: TextStyle(fontSize: 18))),
                             ]),
                             TableRow(children: [
-                            Center(child: Text('1등', style: TextStyle(fontSize: 17))),
-                            Center(child: Text('24,927,355,128', style: TextStyle(fontSize: 17))),
-                            Center(child: Text('12', style: TextStyle(fontSize: 17))),
+                              Padding(padding: EdgeInsets.all(8),
+                              child: Text('1등 상금액', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
+                              Padding(padding: EdgeInsets.all(8),
+                              child: Text('${MyProvider.firstWinamnt}원', style: TextStyle(fontSize: 18))),
+                            ]),
+                            TableRow(children: [
+                              Padding(padding: EdgeInsets.all(8),
+                              child: Text('1등 당첨인원', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+                              Padding(padding: EdgeInsets.all(8),
+                              child: Text('${MyProvider.firstPrzwnerCo}명', style: TextStyle(fontSize: 18))),
                             ]),
                           ],
                         ),

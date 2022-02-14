@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:zlecolotto/model//lotteryball.dart';
 
 class RandomNumberPage extends StatefulWidget {
-  const RandomNumberPage({Key? key}) : super(key: key);
+  const RandomNumberPage({Key? key, parseLottoData}) : super(key: key);
 
   @override
   _RandomNumberPageState createState() => _RandomNumberPageState();
@@ -67,13 +67,13 @@ class _RandomNumberPageState extends State<RandomNumberPage> with TickerProvider
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ball.getBall(),
-                  ball.getBall(),
-                  ball.getBall(),
-                  ball.getBall(),
-                  ball.getBall(),
-                  ball.getBall(),
-                  ball.getBall()
+                  ball.getBall(4),
+                  ball.getBall(5),
+                  ball.getBall(27),
+                  ball.getBall(3),
+                  ball.getBall(7),
+                  ball.getBall(32),
+                  ball.getBall(1)
                 ],
               ),
             ),
