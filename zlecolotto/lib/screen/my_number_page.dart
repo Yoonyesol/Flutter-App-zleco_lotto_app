@@ -38,7 +38,7 @@ class _MyNumberPageState extends State<MyNumberPage> {
                     shrinkWrap: true,
                     padding: EdgeInsets.all(8),
                     separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.black38,),
-                    itemCount: 5,
+                    itemCount: 1,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         height: 30,

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zlecolotto/provider/myProvider.dart';
-import 'package:zlecolotto/screen/tab_bar_page.dart' as Globals;
 import 'package:zlecolotto/model/lotteryball.dart';
 import 'package:zlecolotto/model/round_select_box.dart';
 
@@ -13,9 +12,12 @@ class WinningNumberPage extends StatefulWidget {
   _WinningNumberPageState createState() => _WinningNumberPageState();
 }
 
+//여기서 api 한번 더 불러와서 사용해야겠다.. 어쩔 수 없음
+
 class _WinningNumberPageState extends State<WinningNumberPage> {
   Ball ball = Ball();
   bool _isChecked = false;
+  List<Widget> ballWidget = [];
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +28,25 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
             children: [
               Center(
                 child: Container(//n회차 당첨번호
-                  margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
+                  margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: Column(
                     children: [
                       Container( //당첨번호 회차, 날짜
                         child: Column(
                           children: [
-                            RoundSelectBox(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("회차선택: ",
+                                  style: TextStyle(
+                                      color: Colors.black87,
+                                      fontSize: 20.0
+                                  ),
+                                ),
+                                RoundSelectBox(drwNo: (MyProvider.drwNo).toString()),
+                                //String형태로 넘겨주지 않으면 타입에러 발생
+                              ],
+                            ),
                             SizedBox(
                               height: 10,
                             ),
@@ -123,7 +137,7 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.indigo
                         ),
-                        onPressed: (){},
+                        onPressed: (){showSelectNumberDialog();},
                         label: Text('번호 직접 입력',style: TextStyle(fontSize: 17),),
                         icon: Icon(Icons.app_registration),
                     ),
@@ -240,6 +254,54 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
           ),
         ),
       ),
+    );
+  }
+
+  List<Widget> allBall(){
+    for (var i = 1; i < 46; i++){
+      ballWidget.add(ball.getBall(i));
+    }
+    return ballWidget;
+  }
+
+  void showSelectNumberDialog() {
+
+    showDialog(
+      context: context,
+      builder: (context){
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: new Text("번호 직접 입력"),
+              content: Container(
+                  child: allBall(),
+              ),
+              actions: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    new ElevatedButton(
+                      child: new Text("저장"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    new ElevatedButton(
+                      child: new Text("취소"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            );
+        },);
+      }
+
     );
   }
 }

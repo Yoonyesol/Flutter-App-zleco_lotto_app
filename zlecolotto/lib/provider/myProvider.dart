@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:zlecolotto/model/latestDrw.dart';
 
 class MyProvider with ChangeNotifier{
@@ -17,4 +18,5 @@ class MyProvider with ChangeNotifier{
   static var drwNo; //로또 회차
 
   static int latestDrw = getLatestEpisodeBasedonDate(); //최신 회차
+
 }

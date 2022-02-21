@@ -27,7 +27,6 @@ class _TabBarPageState extends State<TabBarPage> {
 
   var f = NumberFormat('###,###,###,###'); //숫자 세자리씩 끊기
 
-
   void updateData(dynamic LottoData){
     MyProvider.drwNoDate = LottoData['drwNoDate'];
     MyProvider.totSellamnt = f.format(LottoData['totSellamnt']);

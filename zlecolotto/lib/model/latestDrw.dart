@@ -15,7 +15,7 @@ getLatestEpisodeBasedonDate(){
     }else { //오후 9시 이전
       return currentEpi.toInt(); //최신 회차
     }
-  } else if(cDate.weekday == 7) {
+  } else if(cDate.weekday == 7) { //일요일
     return nextEpi.toInt();
   } else {//토, 일요일이 아닐 때
     return currentEpi.toInt(); //최신 회차
