@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zlecolotto/model/allBall.dart';
 import 'package:zlecolotto/provider/myProvider.dart';
 import 'package:zlecolotto/model/lotteryball.dart';
 import 'package:zlecolotto/model/round_select_box.dart';
@@ -18,6 +19,9 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
   Ball ball = Ball();
   bool _isChecked = false;
   List<Widget> ballWidget = [];
+  List menuList = [1, 2, 3, 4,5];
+
+  //for(int i = 1; i<46; i++) i
 
   @override
   Widget build(BuildContext context) {
@@ -257,15 +261,7 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
     );
   }
 
-  List<Widget> allBall(){
-    for (var i = 1; i < 46; i++){
-      ballWidget.add(ball.getBall(i));
-    }
-    return ballWidget;
-  }
-
   void showSelectNumberDialog() {
-
     showDialog(
       context: context,
       builder: (context){
@@ -274,7 +270,7 @@ class _WinningNumberPageState extends State<WinningNumberPage> {
             return AlertDialog(
               title: new Text("번호 직접 입력"),
               content: Container(
-                  child: allBall(),
+                child: allBall(),
               ),
               actions: <Widget>[
                 Row(

@@ -13,6 +13,7 @@ class RandomNumberPage extends StatefulWidget {
 class _RandomNumberPageState extends State<RandomNumberPage> with TickerProviderStateMixin {
   Ball ball = Ball();
   late final AnimationController _animationController;
+  var randomNumber = [1, 1, 1, 1, 1, 1];
 
   @override
   void initState() {
@@ -59,6 +60,7 @@ class _RandomNumberPageState extends State<RandomNumberPage> with TickerProvider
               ),
               onPressed: (){
                 _animationController.animateTo(75);
+                randomNumber = lottoNumber();
               },
               child: Text('룰렛 돌리기',style: TextStyle(fontSize: 18),),
             ),
@@ -67,13 +69,8 @@ class _RandomNumberPageState extends State<RandomNumberPage> with TickerProvider
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ball.getBall(4),
-                  ball.getBall(5),
-                  ball.getBall(27),
-                  ball.getBall(3),
-                  ball.getBall(7),
-                  ball.getBall(32),
-                  ball.getBall(1)
+                  for(var i in randomNumber) ball.getBall(i)
+
                 ],
               ),
             ),
@@ -93,4 +90,14 @@ class _RandomNumberPageState extends State<RandomNumberPage> with TickerProvider
       ),
     );
   }
+}
+
+List<int> lottoNumber(){
+  var number = (List<int>.generate(45, (i) =>
+  i+1)..shuffle()).sublist(0,7);
+
+  print('당첨번호');
+  print(number);
+
+  return number;
 }
